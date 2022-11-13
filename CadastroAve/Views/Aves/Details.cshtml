@@ -1,0 +1,79 @@
+﻿@model CadastroAve.Models.Ave
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Detalhes da ave</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeComum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NomeComum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeCientifico)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NomeCientifico)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Reino)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Reino)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Filo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Filo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Classe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Classe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ordem)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ordem)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Familia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Familia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Genero)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Genero)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Especie)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Especie)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DistribuicaoGeografica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DistribuicaoGeografica)
+        </dd>
+    </dl>
+    <img src="/css/bentivi.jpg" width="500px" alt="Ave">
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Editar</a>
+    <a type="submit" class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+
+</div>
