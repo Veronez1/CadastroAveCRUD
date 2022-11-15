@@ -50,5 +50,9 @@ namespace CadastroAve.Models
         [Display(Name = "Distribuição Geográfica")]
         public string DistribuicaoGeografica { get; set; }
 
+        [Column("Imagem")]
+        [Display(Name = "Imagem")]
+        public string Imagem { get; set; }
+
     }
 }

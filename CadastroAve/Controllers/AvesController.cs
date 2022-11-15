@@ -12,10 +12,15 @@ namespace CadastroAve.Controllers
     public class AvesController : Controller
     {
         private readonly Contexto _context;
+        private string caminhoServidor;
 
-        public AvesController(Contexto context)
+        public AvesController(Contexto context, IWebHostEnvironment sistema)
         {
+            caminhoServidor = sistema.WebRootPath;
+
             _context = context;
+
+
         }
 
         // GET: Aves
@@ -53,10 +58,26 @@ namespace CadastroAve.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeComum,NomeCientifico,Reino,Filo,Classe,Ordem,Familia,Genero,Especie,DistribuicaoGeografica")] Ave ave)
+        public async Task<IActionResult> Create([Bind("Id,NomeComum,NomeCientifico,Reino,Filo,Classe,Ordem,Familia,Genero,Especie,DistribuicaoGeografica,Imagem")] Ave ave, IFormFile foto)
         {
             if (ModelState.IsValid)
             {
+                string caminhoParaSalvarImagem = caminhoServidor + "\\imagem\\";
+                string novoNomeParaImagem = Guid.NewGuid().ToString() + "_" + foto.FileName;
+
+                if (!Directory.Exists(caminhoParaSalvarImagem))
+                {
+                    Directory.CreateDirectory(caminhoParaSalvarImagem);
+                }
+                string fileName = caminhoParaSalvarImagem + novoNomeParaImagem;
+
+                using (var stream = System.IO.File.Create(fileName))
+                {
+                    foto.CopyToAsync(stream);
+                }
+
+                ave.Imagem = "\\imagem\\" + novoNomeParaImagem;
+
                 _context.Add(ave);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,7 +106,7 @@ namespace CadastroAve.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeComum,NomeCientifico,Reino,Filo,Classe,Ordem,Familia,Genero,Especie,DistribuicaoGeografica")] Ave ave)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeComum,NomeCientifico,Reino,Filo,Classe,Ordem,Familia,Genero,Especie,DistribuicaoGeografica,Imagem")] Ave ave)
         {
             if (id != ave.Id)
             {

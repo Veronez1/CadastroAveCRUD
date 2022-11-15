@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="NomeComum" class="control-label"></label>
@@ -62,14 +62,24 @@
                 <span asp-validation-for="DistribuicaoGeografica" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Imagem" class="control-label" style="display: none;"></label>
+                <input asp-for="Imagem" class="form-control" value="Imagem" style="display: none;" />
+            </div>
+            <div class="form-group">
+                <label>Escolha sua imagem para upload</label>
+                <input type="file" name="foto" />
+            </div>
+            <br />
+            <div class="form-group" style="display:inline">
                 <input type="submit" value="Adicionar" class="btn btn-primary" />
+            </div>
+            <div style="display:inline">
+                <a type="submit" class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
 </div>
-<div>
-    <a type="submit" class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
